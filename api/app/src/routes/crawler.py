@@ -41,10 +41,18 @@ def get_resquest_responses():
     except Exception as e:
         print(e)
     if 'log_list' in contents:
-        li = [item.get('request') for item in contents['log_list']]
-        req.append(li)
-    return req
+        urls = set()
+        for item in contents['log_list']:
+            if 'request' in item:
+                request_value = item['request']
+                if isinstance(request_value, str):
+                    urls.add(request_value)
+                elif isinstance(request_value, list):
+                    for request_item in request_value:
+                            urls.add(request_item)
 
-# urls = ['https://example.com/page1', 'https://example.com/page2', 'https://example.com/page3']
-# cosine_distance_matrix = get_cosine_distance_matrix(urls)
-# print(cosine_distance_matrix)
+        unique_urls = list(urls)
+        return unique_urls
+    else:
+        urls = set()
+        return list(urls)
