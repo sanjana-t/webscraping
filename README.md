@@ -11,6 +11,8 @@ https://github.com/sanjana-t/webscraping/assets/73529434/cef5640c-31b7-464d-bde4
 --- Main libraries
  - beautifulsoup4 (web scraping)
  - transfomers (text summarization)
+
+   
 ---features
    - web scrape api
    - web urls crawl async
