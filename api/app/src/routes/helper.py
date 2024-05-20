@@ -44,7 +44,8 @@ def scrape_summarize_test(item):
         text = ' '.join([p.get_text() for p in soup.find_all('p')])
 
         summarizer = pipeline("summarization", model="t5-small")
-        summary = summarizer(text, do_sample=False)[0]['summary_text']
+        # summary = summarizer(text, do_sample=False)[0]['summary_text']
+         summary = summarizer(text, max_length=int(len(content)*0.3), min_length=int(len(content)*0.2), do_sample=False)[0]['summary_text']
         data['title']=title
         data['summary']=summary
         data['links']=links
