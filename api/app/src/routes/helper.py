@@ -82,18 +82,21 @@ def get_result():
         else:
             return {"status": "In progress"}
 # for each url
+
 def cosine_matrix(item):
     documents = [extract_text_from_url(url) for url in item.urls]
     vectorizer = TfidfVectorizer()
     tfidf_matrix = vectorizer.fit_transform(documents)
     cosine_sim_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    cosine_dist_matrix = 1 - cosine_sim_matrix
     similarities = []
     for i in range(len(item.urls)):
         for j in range(i + 1, len(item.urls)):
             similarities.append({
                 i: item.urls[i],
                 j: item.urls[j],
-                "similarity": cosine_sim_matrix[i, j]
+                "similarity": cosine_sim_matrix[i, j],
+                "distance": cosine_dist_matrix[i, j]
             })
 
     return similarities
