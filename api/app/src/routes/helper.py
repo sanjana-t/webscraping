@@ -81,6 +81,23 @@ def get_result():
             return {"message": "Crawling complete", "results": scraped_results,"status": "Completed"}
         else:
             return {"status": "In progress"}
+# for each url
+def cosine_matrix(urls):
+    documents = [await extract_text_from_url(url) for url in urls]
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(documents)
+    cosine_sim_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    similarities = []
+    for i in range(len(urls)):
+        for j in range(i + 1, len(urls)):
+            similarities.append({
+                "url1": urls[i],
+                "url2": urls[j],
+                "similarity": cosine_sim_matrix[i, j]
+            })
+
+    return similarities
+
 
 # Function to extract text from a URL
 def extract_text_from_url(url):
