@@ -16,6 +16,6 @@ https://github.com/sanjana-t/webscraping/assets/73529434/cef5640c-31b7-464d-bde4
    
 ---features
    - web scrape api
-   - web urls crawl async
-   - all requests till date api
+   - web urls crawl async with 30% text
+   - all requests till date api with pagination and no duplicate
    - costine distance matrix integrated
