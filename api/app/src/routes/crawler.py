@@ -30,6 +30,10 @@ async def result_api():
     else:
         return get_result()
 
+@router.post("/cosineMatrix")
+def get_cosine_similarity(urls:BulkItem):
+    return cosine_matrix(urls)
+
 @router.post("/req_links")
 def get_all_requested_links(pagedetails :PaginationItem):
     filename = 'requests_responses.json'
